@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+import React, { useState } from "react";
+import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
+import NavigationMenu from './Components/NavigationMenu';
+import Home from './Components/Home';
+import Products from './Components/Products';
+import About from './Components/About';
+import RegistrationForm from "./Components/RegistrationForm";
 
 function App() {
+  const [finalPrice, setFinalPrice] = useState(0); 
+  const [total,setTotal] = useState(false);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      {/* // ADD OTHER COMPONENTS HERE */}
+      <NavigationMenu finalPrice={finalPrice} total={total} />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path="Products" element={<Products setFinalPrice={setFinalPrice} setTotal={setTotal}/>} />
+        <Route path="About" element={<About />} />
+      </Routes>
+      <RegistrationForm />
+
     </div>
   );
 }
-
 export default App;
